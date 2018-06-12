@@ -7,6 +7,8 @@
 		     the blog data when we hover over the link or tap it on a touchscreen -->
 		<li><a rel=prefetch class='{page === "blog"  ? "selected" : ""}' href='blog'>blog</a></li>
 	</ul>
+
+	<button on:click='login()'>login</button>
 </nav>
 
 <style>
@@ -54,3 +56,15 @@
 		display: block;
 	}
 </style>
+
+<script>
+	import netlifyIdentity from 'netlify-identity-widget';
+	
+	export default {
+		methods: {
+			login() {
+				netlifyIdentity.open();
+			}
+		}
+	}
+</script>

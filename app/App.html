@@ -22,10 +22,26 @@
 
 <script>
 	import Nav from '../components/Nav.html';
+	import netlifyIdentity from 'netlify-identity-widget';
 
 	export default {
 		components: {
 			Nav
+		},
+
+		oncreate() {
+			netlifyIdentity.init({
+				container: '#sapper',
+				APIUrl: 'https://objective-mccarthy-b48ff5.netlify.com/.netlify/identity'
+			});
+
+			netlifyIdentity.on('init', user => this.store.set({ user }));
+			netlifyIdentity.on('login', user => this.store.set({ user }));
+			netlifyIdentity.on('logout', () => this.store.set({ user: undefined }));
+			netlifyIdentity.on('error', err => {
+				console.log('netlify identity error', error);
+				this.store.set({ user: undefined });
+			});
 		}
 	};
 </script>
