@@ -8,7 +8,11 @@
 		<li><a rel=prefetch class='{page === "blog"  ? "selected" : ""}' href='blog'>blog</a></li>
 	</ul>
 
+	{#if !$user}
 	<button on:click='login()'>login</button>
+	{:else}
+	<div>{$user.user_metadata.full_name}</div>
+	{/if}
 </nav>
 
 <style>
